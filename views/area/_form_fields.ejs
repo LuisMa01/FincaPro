@@ -1,0 +1,24 @@
+
+<label>Asignar Cultivo</label>
+<div>
+    <select name='name'>
+        <% campo.forEach(campos => { %>                
+                <option selected label="<%= campos.name %>" value="<%= campos.id %>"></option>           
+        <% }) %> 
+    </select>
+</div>
+<div>
+    <select name='cultivo'>
+        <% cultivos.forEach(cultivo => { %>                
+                <option selected label="<%= cultivo.name %>" value="<%= cultivo.id %>"></option> 
+                           
+        <% }) %> 
+        
+    </select>
+    
+    
+</div>
+<div>
+    <label>Publish Date</label>
+    <input type="date" name="initDate" value="<%= areaAsignar.initDate == null ? '' : areaAsignar.initDate.toISOString().split('T')[0] %>">
+</div>

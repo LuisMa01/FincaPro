@@ -1,0 +1,35 @@
+<h2>Actividades Asignadas</h2>
+<!--
+<form action="/area" method="get">
+    <div>
+        <label>Asignacion</label>
+       <input type="text" name="name" value="</%= searchOptions.name %>">       
+    </div>  
+    
+
+    <button type="submit">Search</button>  
+
+
+</form>
+<br>
+-->
+
+<!-- para generar una lista de las actividades asignadas-->
+<div>
+<% areaAsignar.forEach(area => { %> 
+    <a href="/area/<%= area.id %>/show">
+        <!-- <img height="150" width="100" src="</%= cultivo.coverImagePath %>"> -->
+        <div><%= area.asignacion %></div>
+    </a>
+        <div><%= area.areaName.name %></div>
+        <div><%= area.cultivoName.name %></div> 
+        <div><%= area.initDate != undefined ? area.initDate.toDateString() : 'No se ha planificado'  %></div>
+              
+    
+    <a href="/area/<%= area.id %>/plan">Planificar Actividad</a>
+
+    <%- include("../partials/deleteForm", { url: `/area/${area.id}`}) %> 
+<% }) %> 
+</div>
+
+

@@ -1,0 +1,31 @@
+<h2>Buscar Cultivos</h2>
+<form action="/cultivo" method="get">
+    <div>
+        <label>Cultivo</label>
+       <input type="text" name="name" value="<%= searchOptions.name %>">       
+    </div>  
+    
+
+    <button type="submit">Search</button>  
+
+
+</form>
+<br>
+
+
+<!-- para generar una lista de cultivo en base a la imagen-->
+<div>
+<% cultivos.forEach(cultivo => { %> 
+    <a href="/cultivo/<%= cultivo.id %>">
+        <!-- <img height="150" width="100" src="</%= cultivo.coverImagePath %>"> -->
+        <div><%= cultivo.name %></div>
+    </a>
+        <div><%= cultivo.description %></div> 
+              
+    
+    <a href="/cultivo/<%= cultivo.id %>/addActividad">Agregar actividad</a>
+
+    <a href="/cultivo/<%= cultivo.id %>/edit">editar</a>
+    <%- include("../partials/deleteForm", { url: `/cultivo/${cultivo.id}`}) %> 
+<% }) %> 
+</div>

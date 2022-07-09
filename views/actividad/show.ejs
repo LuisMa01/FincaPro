@@ -1,0 +1,4 @@
+<h3><%= actividad.name %></h3>
+<p><%= actividad.description %></p>
+<a href="/actividad/<%= actividad.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', { url: `/actividad/${actividad.id}`}) %> 

@@ -1,0 +1,7 @@
+<h2>Editar Actividad</h2>
+<form action="/actividad/<%= actividad.id %>?_method=PUT" method="post">
+    <%- include('_form_fields') %> 
+    <a href="/actividad/<%= actividad.id %>">Cancel</a> 
+    <% console.log('no funciona') %> 
+    <button type="submit">Update</button>
+</form>

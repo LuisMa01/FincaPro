@@ -1,0 +1,19 @@
+<h3><%= cultivo.name %></h3>
+<p><%= cultivo.description %></p> 
+
+
+<a href="/cultivo/<%= cultivo.id %>/edit">editar</a>
+<a href="/cultivo/<%= cultivo.id %>/addActividad">Agregar actividad</a>
+
+<%- include("../partials/deleteForm", { url: `/cultivo/${cultivo.id}`}) %> 
+<div>  
+    <h3>Lista de Actividades</h3>
+    <ul>
+        <% cultivo.labor.forEach(labor => { %>
+        <li> 
+            <p><%= labor.actividad.name %></p>
+            
+        </li>
+        <% }) %>          
+    </ul>        
+</div>

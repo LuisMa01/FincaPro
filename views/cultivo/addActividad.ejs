@@ -1,0 +1,34 @@
+
+<form action="/cultivo/<%= cultivo.id %>/addActividad/?_method=PUT" method="post">   
+<h3><%= cultivo.name %></h3>
+<p><%= cultivo.description %></p> 
+<div>    
+    
+    <label>Actividad</label>
+
+    <select name='labor'>
+        <% actividades.forEach(actividad => { %>                
+                <option selected label="<%= actividad.name %>" value="<%= actividad.id %>"></option>           
+        <% }) %> 
+    </select>
+    <button type="submit">agregar</button>
+</div>
+</form>
+
+    <h3>Lista de Actividades</h3>      
+
+        <ul>
+            <% cultivo.labor.forEach(labor => { %>
+            <li>                 
+                <form method="POST" action="/cultivo/<%= labor.id %>/addActividad?_method=DELETE">
+                    <p><%= labor.actividad.name %></p>
+                                                       
+                    <button type="submit">Delete</button>
+                </form>                
+            </li>
+            <% }) %>    
+            
+        </ul>       
+
+
+<a href="/cultivo">Cancel</a>

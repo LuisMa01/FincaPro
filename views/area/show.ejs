@@ -1,0 +1,40 @@
+<h3><%= asignacion.asignacion %></h3>
+<h3><%= asignacion.areaName.name %></h3>
+<p><%= asignacion.cultivoName.name %></p> 
+<div><%= asignacion.initDate != undefined ? asignacion.initDate.toDateString() : 'No se ha planificado'  %></div>
+
+
+<a href="/area/<%= asignacion.id %>/plan">Planificar Actividad</a>
+<a href="/area/<%= asignacion.id %>/addActividad">Agregar actividad</a>
+
+<%- include("../partials/deleteForm", { url: `/area/${asignacion.id}`}) %> 
+
+
+<div>
+
+<table>
+    <tr>
+        <th>Actividad</th>
+        <th>Fecha Programada</th>
+        <th>Fecha de Cumplimiento</th>
+        <th>Inventario</th>
+    </tr>
+    
+    <% asignacion.cultivoActividad.forEach(actividad => { %>
+        
+        <tr> 
+            <th><%= actividad.actividad.name %></th>
+            
+            <th>                                
+                <div><%= actividad.fechaPlan != undefined ? actividad.fechaPlan.toDateString() : 'No se ha planificado'  %></div>
+            </th>
+            <th>
+                <div><%= actividad.fechaRealizacion != undefined ? actividad.fechaRealizacion.toDateString() : 'No se ha completado' %></div>
+            </th>
+            <th>Inventario</th>            
+        </tr>
+        
+    <% }) %> 
+</table>
+
+</div>

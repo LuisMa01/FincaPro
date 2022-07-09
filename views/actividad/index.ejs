@@ -1,0 +1,21 @@
+<h2>Busqueda</h2>
+<form action="/actividad" method="get">
+    <label>Nombre</label>
+    <input type="text" name="name" value="<%= searchOptions.name %>">
+    <button type="submit">Buscar</button>
+</form>
+
+<br>
+<% actividades.forEach(actividad => { %>
+    <div title="<%= actividad.description %>"><%= actividad.name %></div>
+    <div><%= actividad.description %></div>
+
+
+    <a href="/actividad/<%= actividad.id %>">View</a>
+    <a href="./actividad/<%= actividad.id %>/edit">Edit</a>
+
+    <%- include('../partials/deleteForm', { url: `/actividad/${actividad.id}` }) %>
+
+
+
+<% }) %> 
