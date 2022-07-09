@@ -1,0 +1,52 @@
+<form action="/area/<%= asignacion.id %>/addActividad/?_method=PUT" method="post">   
+    <h3><%= asignacion.asignacion %></h3>
+    <h3><%= asignacion.areaName.name %></h3>
+    <p><%= asignacion.cultivoName.name %></p> 
+    <div>    
+        
+        <label>Actividad</label>
+    
+        <select name='labor'>
+            <% actividades.forEach(actividad => { %>                
+                    <option selected label="<%= actividad.name %>" value="<%= actividad.id %>"></option>           
+            <% }) %> 
+        </select>
+        <button type="submit">agregar</button>
+    </div>
+    </form>
+    
+        <h3>Lista de Actividades</h3>  
+        
+        <table>
+        <tr>
+            <th>Actividad</th>
+            <th>Fecha Programada</th>
+            <th>Fecha de Cumplimiento</th>
+            <th>Inventario</th>
+            <th></th>
+        </tr>
+
+        <% asignacion.cultivoActividad.forEach(labor => { %>
+                   
+            <form method="POST" action="/area/<%= labor.id %>/addActividad?_method=DELETE">
+                <tr>
+                    <th><%= labor.actividad.name %></th>
+                    
+                    <th>                                
+                        <div><%= labor.fechaPlan != undefined ? labor.fechaPlan.toDateString() : 'No se ha planificado'  %></div>
+                    </th>
+                    <th>
+                        <div><%= labor.fechaRealizacion != undefined ? labor.fechaRealizacion.toDateString() : 'No se ha completado' %></div>
+                    </th>
+                    <th>Inventario</th>   
+                    <th><button type="submit">Delete</button></th>         
+                </tr> 
+            </form>
+        
+        <% }) %>  
+        </table>
+        
+                 
+    
+    
+    <a href="/cultivo">Cancel</a>

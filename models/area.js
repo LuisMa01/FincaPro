@@ -68,8 +68,4 @@ const asignarSchema = new mongoose.Schema({
     
 })
 
-
-
-
-
 module.exports = mongoose.model('AreaAsignar', asignarSchema)

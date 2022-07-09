@@ -179,4 +179,90 @@ router.get('/:id/show', async (req, res) => {
     res.render('area/show', {asignacion : asignacion})
 })
 
+
+
+//agregar actividad
+
+router.get('/:id/addActividad', async (req, res) => {
+    
+    try {
+         const asignacion = await AreaAsignar.findById(req.params.id)
+        .populate('areaName', 'name')
+        .populate('cultivoName', 'name')
+        .populate('cultivoActividad.actividad', 'name')
+        .exec()
+        
+        const actividades = await Actividad.find({activo : true})        
+            
+        const params = {
+            asignacion: asignacion,
+            actividades: actividades
+        }
+        
+        res.render('area/addActividad', params)
+        
+
+    } catch {
+        res.render(`area/index`)
+    }
+
+})
+
+
+router.put('/:id/addActividad', async (req, res) => {
+    let asignacion
+    try {        
+        asignacion = await AreaAsignar.findById(req.params.id)
+        const actividades = await Actividad.find({activo : true})
+        let params = {
+            asignacion: asignacion,
+            actividades: actividades
+        }
+        
+        await asignacion.cultivoActividad.push({ actividad: req.body.labor})
+        await asignacion.save()
+        params.asignacion = await AreaAsignar.findById(req.params.id).populate('cultivoActividad.actividad', 'name').exec()
+        res.render(`area/addActividad`, params)
+    } catch {
+        res.render(`area/index`)
+        
+    }
+})
+
+router.delete('/:id/addActividad', async (req, res) => {
+    let asignacion
+    
+    try {
+        asignacion = await AreaAsignar.findOne({"cultivoActividad._id": req.params.id})
+        .populate('areaName', 'name')
+        .populate('cultivoName', 'name')
+        .populate('cultivoActividad.actividad', 'name')
+        .exec()
+        
+        const actividades = await Actividad.find()
+        
+        await asignacion.cultivoActividad.id(req.params.id).remove()
+        await asignacion.save()
+        let params = {
+            asignacion: asignacion,
+            actividades: actividades
+        }
+        
+        
+        res.render(`area/addActividad`, params)
+        
+    } catch {
+        if (cultivo != null) {
+            res.render('area/show', {
+                asignacion: asignacion,
+                errorMessage: 'Could not remove actividad'
+            })
+        } else {
+            res.redirect('/')
+        }
+    }
+})
+
+
+
 module.exports = router

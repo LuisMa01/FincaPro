@@ -66,6 +66,8 @@ router.post('/', async (req, res) => {
     }
 })
 
+//agregar actividad
+
 router.get('/:id/addActividad', async (req, res) => {
     
     try {
@@ -129,7 +131,7 @@ router.delete('/:id/addActividad', async (req, res) => {
         if (cultivo != null) {
             res.render('cultivo/show', {
                 cultivo: cultivo,
-                errorMessage: 'Could not remove book'
+                errorMessage: 'Could not remove actividad'
             })
         } else {
             res.redirect('/')
