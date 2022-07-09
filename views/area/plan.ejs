@@ -2,13 +2,6 @@
 <h3><%= asignacion.areaName.name %></h3>
 <p><%= asignacion.cultivoName.name %></p> 
 
-
-<a href="/area/<%= asignacion.id %>/edit">editar</a>
-
-
-<%- include("../partials/deleteForm", { url: `/area/${asignacion.id}`}) %> 
-
-
 <div>
 <form action="/area/<%= asignacion.id %>/plan/?_method=PUT" method="post">
 <table>
@@ -36,5 +29,6 @@
 </table>
 <button type="submit">Guardar</button>
 </form>
+<a href="/area/<%= asignacion.id %>/show">Cancel</a>
 </div>
 

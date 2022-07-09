@@ -169,8 +169,7 @@ router.get('/:id/edit', async (req, res) => {
             actividades: actividades
         }
         
-        res.render('cultivo/edit', params)
-        
+        res.render('cultivo/edit', params)       
 
     } catch {
         res.render(`cultivo/`)
@@ -206,19 +205,12 @@ router.delete('/:id', async (req, res) => {
         if (cultivo != null) {
             res.render('cultivo/show', {
                 cultivo: cultivo,
-                errorMessage: 'Could not remove book'
+                errorMessage: 'Could not remove cultivo'
             })
         } else {
             res.redirect('/')
-        }
-        
+        }        
     }
-
-
 })
-
-
-
-
 
 module.exports = router

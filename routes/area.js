@@ -263,6 +263,29 @@ router.delete('/:id/addActividad', async (req, res) => {
     }
 })
 
+//borrar asignacion
+router.delete('/:id', async (req, res) => {
+    let asignacion
+    try {
+        asignacion = await AreaAsignar.findById(req.params.id)
+        .populate('areaName', 'name')
+        .populate('cultivoName', 'name')
+        .populate('cultivoActividad.actividad', 'name')
+        .exec()
+        await asignacion.remove()
+        res.redirect('/area')
+    } catch {
+        if (asignacion != null) {
+            res.render('asignacion/show', {
+                asignacion: asignacion,
+                errorMessage: 'Could not remove Asignación de cultivo'
+            })
+        } else {
+            res.redirect('/')
+        }        
+    }
+})
+
 
 
 module.exports = router
